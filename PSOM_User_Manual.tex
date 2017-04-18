@@ -162,14 +162,14 @@ INTEGER, PARAMETER :: NI=96, NJ=160, NK = 32, ngrid=5, maxout=626736, maxint=561
 
 \subsection{cppdefs.h}
 
-This file defines the different modules to be used in the experiment. Again, it is recommended to copy this file into the experiment folder (e.g., \texttt{my\_experiment/inc/} before making any modifications. To include (exclude) a module, use \# The file includes 13 modules:
+This file defines the different options to be used in the experiment. Again, it is recommended to copy this file into the experiment folder (e.g., \texttt{my\_experiment/inc/} before making any modifications. To include (exclude) an option, use \#define (\#undef) $option\_name$. The file includes 13 options:
 
 \begin{enumerate}
 	\item[$runtracmass$ :] placeholder
 	\item[$periodic\_ew$ :] placeholder
 	\item[$periodic\_ns$ :] placeholder
 	\item[$allow\_particle$ :] placeholder
-	\item[$rhoonly$ :] placeholder
+	\item[$rhoonly$ :] If defined, only the density field $rho$ is used. The density field is stored in the salinity array ($s$; see \texttt{evalrho\_rho.f90}). If not defined, $rho$ is computed from the salinity ($s$) and temperature ($T$) fields (see \texttt{evalrho\_sT.f90}).
 	\item[$relaxation$ :] placeholder
 	\item[$fixed\_bottom\_thickness$ :] placeholder
 	\item[$file\_output$ :] placeholder
