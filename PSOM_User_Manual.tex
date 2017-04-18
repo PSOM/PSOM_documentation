@@ -1,0 +1,191 @@
+\documentclass[12pt,letterpaper,titlepage]{article}
+
+
+% LIST OF PACKAGES
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage{times}              % Improve font over the default
+\usepackage{amssymb,amsmath}		% Package for mathematical equations
+\usepackage{color}
+\usepackage{caption,booktabs,array}
+\usepackage{microtype}          % Subtly improves word spacing
+\usepackage{hyperref}
+\usepackage{listings}			% Displays code lines (highly customizable)
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.4,0.4,0.4}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{backcolour},   
+	commentstyle=\color{codegray},
+	keywordstyle=\color{magenta},
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codepurple},
+	basicstyle=\small,
+	basewidth=0.5em,
+	breakatwhitespace=false,
+	breaklines=true,
+	captionpos=b,
+	keepspaces=true,
+	numbers=left,
+	numbersep=5pt,
+	showspaces=false,
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=1,
+	aboveskip = 10pt,
+	belowskip = 15pt
+}
+\lstset{style=mystyle}
+
+% MACROS
+% The FIXME macro
+\newcommand{\fixme}[1]{\color{red}$<$\textbf{FIX ME: #1}$>$\color{black}}
+
+
+% MAIN DOCUMENT
+\begin{document}
+	\title{User Manual for PSOM}
+	\author{$\sim$ et. al}
+	\date{2017}
+	\maketitle
+
+\tableofcontents
+\pagebreak
+
+\section{Introduction}
+\section{Headstart}
+\section{Configure compile run sequence}
+\section{Test Cases}
+\subsection{wiggles}
+\subsection{NA}
+\subsection{Shelfbreak}
+\section{Setting up your PSOM simulation}
+\subsection{Create your experiment directory}
+For every experiment you want to conduct, create a directory that will contain the source files specific to this experiment. As a example, you want to create an experiment named "my\_experiment". First, create a directory \texttt{code/my\_experiment}, in which you will create two subdirectories \texttt{/inc} and \texttt{/src} . You can either create this directory manually, or, in \texttt{code/}, you can run:
+
+\begin{lstlisting}[language=sh]
+# Copies the template directory
+cp -r expe_template my_experiment
+\end{lstlisting}
+Whether you are a user or a developer, \textbf{you are strongly invited to leave untouched the files contained in \texttt{code/model/}}. This directory is designed to contain the latest version of the model, which is common to every user at a given time. For every routine that will be specific to \texttt{my\_experiment}, a new subroutine should be created in \texttt{code/my\_experiment/src}. This can be achieved using the following command:
+\begin{lstlisting}[language=sh]
+# Copies the initial conditions subroutine
+cp model/src/ini_st.f90 my_experiment/src
+\end{lstlisting}
+The compiling step (\fixme{see Section on compiling}) includes a superseding procedure that will take into account the new version of \texttt{ini\_st.f90} (in \texttt{code/my\_experiment/src}) and disregard the standard version found in \texttt{code/model/src}. More precisely, it will create the makefile based on this new state of the model (in \texttt{./mkfile}), compile and create the executable \texttt{code/exe/nh\_my\_experiment}. More details on \texttt{compile.sh} may be found by running:
+
+\begin{lstlisting}[language=sh]
+# Provides more information on compile.sh
+sh tools/compile.sh -help
+\end{lstlisting}
+
+\subsection{Defining your model grid}
+
+The grid size is defined in \texttt{size.h}. If you wish to modify the grid size, you must first copy \texttt{size.h} into your experiment's directory:
+
+\begin{lstlisting}[language=sh]
+# Copies the grid file
+cp model/inc/size.h my_experiment/inc
+\end{lstlisting}
+
+Grids used in previous experiments are listed in this file and commented out. If your grid appears in a commented line, Comment the uncommented line and uncomment the one you want. Be aware that if your grid set requires more than 2Go, you might experience compilation issues. If so, you may fix the issue by editing \texttt{tools/genmakefilel} to replace the default compiling options by:
+
+\begin{lstlisting}[	basicstyle=\footnotesize, numbers=none]
+ fflags_o="-fpp -real-size 64 -mcmodel medium -shared-intel -stand 03 -u" 
+ fflags_e="-fpp -real-size 64 -mcmodel medium -shared-intel -stand 03 -u" 
+\end{lstlisting}
+
+If your grid set does not appear in \texttt{my\_experiment/inc/size.h}, you can create the required line. Defining the model grid is not straight-forward, because of the multi-grid solver mgrid \fixme{(See Section)}. The multi-grid solver is used to allow the reuse of array space in \texttt{mgrid.f90} \fixme{insert link to function?}. Although this issue could now be circumvented by making use of f90's dynamic allocation of memory, the code was originally in fortran77, explaining the need for space re-allocation. A step-by-step approach to defining your own grid is provided below:
+
+\begin{enumerate}
+	\item Choose grid dimensions $NI$, $NJ$, and $NK$ (i.e., the number of grid cells in $x$, $y$, and $z$ directions) such that the grid can be subdivided a maximum number of times by a factor of 2 to form "$ngrid$" levels of grid. For example, choosing $NI=48$, $NJ=24$, and $NK=32$ constrains the grid levels to 4 (i.e., $ngrid = 4$), because:
+
+	\begin{align*} 
+		NI:& \; 48; 24; 12; 6; 3 &\text{(5 grid levels)}\\
+		NJ:& \; 24; 12; 6; 3 &\text{(4 grid levels)}\\
+		NK:& \; 32; 16; 8; 4; 2 &\text{(5 grid levels)}\\
+	\end{align*}
+	The number of grid points possible for a specific $ngrid$ can be computed by multiplying prime numbers (2, 3, 5, 7, etc.) by $2^{ngrid-1}$. Table \ref{tab: ngrid} lists some of the most commonly used number of grid points, depending on the number of grid levels $ngrid$.
+
+	\item Compile \texttt{tools/preproc.f90}:
+\begin{lstlisting}[language=sh]
+# Compiles preproc.f90 (e.g., using ifort)
+ifort preproc.f90 -o preproc
+\end{lstlisting}	
+	
+	\item Runs \texttt{preproc.f90} and fill the values that are asked:
+\begin{lstlisting}[language=sh]
+# Runs preproc.f90
+./preproc.f90
+\end{lstlisting}	
+
+\item Copy/Paste the last line the program provides in \texttt{my\_experiment/inc/size.h}. Below is an example for $NI=96$, $NJ=160$, and $NK=32$ (hence $ngrid=5$, see Table \ref{tab: ngrid}):
+\begin{lstlisting}[	basewidth=0.5em]
+./preproc
+	number of grid levels in mgrid, ngrid = 
+5
+	input the grid info
+	NI = 
+96
+	NJ = 
+160
+	NK = 
+32
+	Number of grid points on fine grid: nx,ny,nz   96   160   32
+m,ntint,ntout,nbc(m) 1      491520      539784       47104
+m,ntint,ntout,nbc(m) 2       61440       73800       11776
+m,ntint,ntout,nbc(m) 3        7680       10920        2944
+m,ntint,ntout,nbc(m) 4         960        1848         736
+m,ntint,ntout,nbc(m) 5         120         384         184
+Copy the following line to size.h
+INTEGER, PARAMETER :: NI=96, NJ=160, NK = 32, ngrid=5, maxout=626736, maxint=561720, int1=491520
+\end{lstlisting}	
+\end{enumerate}
+
+\begin{table}[t]
+	\caption{\label{tab: ngrid} Number of grid points associated with a specific number of grid levels $ngrid$. These numbers can be computed by multiplying prime numbers (2, 3, 5, 7, etc.) by $2^{ngrid-1}$. Each experiment's number of grid levels is set by the minimum $ngrid$ associated with $NI$, $NJ$, and $NK$.}
+	\centering
+	\begin{tabular}{ccrrrrrrrr}
+		\toprule
+		$ngrid$& & \multicolumn{8}{c}{Number of grid points ($NI$, $NJ$, or $NK$)}\\
+		\midrule
+		4 & &  16  &  24  &  40  &  56  &  88  &  104  &  136  &  152 \\
+		5 & &  32  &  48  &  80  &  112  &  176  &  208  &  272  &  304 \\
+		6 & &  64  &  96  &  160  &  224  &  352  &  416  &  544  &  608 \\				
+		7 & &  128  &  192  &  320  &  448  &  704  &  832  &  1088  &  1216 \\
+		\bottomrule
+	\end{tabular}
+	\label{tab: multiple_regression}
+\end{table}
+
+
+\subsection{cppdefs.h}
+
+This file defines the different modules to be used in the experiment. Again, it is recommended to copy this file into the experiment folder (e.g., \texttt{my\_experiment/inc/} before making any modifications. To include (exclude) a module, use \# The file includes 13 modules:
+
+\begin{enumerate}
+	\item[$runtracmass$ :] placeholder
+	\item[$periodic\_ew$ :] placeholder
+	\item[$periodic\_ns$ :] placeholder
+	\item[$allow\_particle$ :] placeholder
+	\item[$rhoonly$ :] placeholder
+	\item[$relaxation$ :] placeholder
+	\item[$fixed\_bottom\_thickness$ :] placeholder
+	\item[$file\_output$ :] placeholder
+	\item[$file\_output\_cdf$ :] placeholder
+	\item[$file\_output\_bin$ :] placeholder
+	\item[$gotm\_call$ :] placeholder
+	\item[$implicit$ :] placeholder
+	\item[$parallel$ :] placeholder
+\end{enumerate}
+
+
+\subsection{namelist}
+This file defines key parameters relating to the experiment (e.g., grid resolution, time step, diffusion, output, ...). Again, it is recommended to copy this file into the experiment folder (e.g., \texttt{my\_experiment/} before making any modifications. Each parameter in the file is either self-explanatory or include a short description as a comment.
+
+\subsection{Defining the initial conditions}
+
+
+\end{document}
+
