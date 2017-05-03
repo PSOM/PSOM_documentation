@@ -1,0 +1,14 @@
+\contentsline {section}{\numberline {1}Introduction}{2}{section.1}
+\contentsline {section}{\numberline {2}Headstart}{2}{section.2}
+\contentsline {section}{\numberline {3}Configure compile run sequence}{2}{section.3}
+\contentsline {section}{\numberline {4}Test Cases}{2}{section.4}
+\contentsline {subsection}{\numberline {4.1}Wiggles}{2}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}NA}{2}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}Shelfbreak}{2}{subsection.4.3}
+\contentsline {section}{\numberline {5}Setting up your PSOM simulation}{2}{section.5}
+\contentsline {subsection}{\numberline {5.1}Create your experiment directory}{2}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}Defining your model grid}{3}{subsection.5.2}
+\contentsline {subsection}{\numberline {5.3}cppdefs.h}{5}{subsection.5.3}
+\contentsline {subsection}{\numberline {5.4}namelist}{6}{subsection.5.4}
+\contentsline {subsection}{\numberline {5.5}Defining the initial conditions}{6}{subsection.5.5}
+\contentsline {subsubsection}{\numberline {5.5.1}Temperature, salinity, and density}{7}{subsubsection.5.5.1}
