@@ -57,9 +57,12 @@
 \section{Headstart}
 \section{Configure compile run sequence}
 \section{Test Cases}
-\subsection{wiggles}
+\subsection{Wiggles}
+\label{sec: Wiggles}
 \subsection{NA}
+\label{sec: NA}
 \subsection{Shelfbreak}
+\label{sec: Shelfbreak}
 \section{Setting up your PSOM simulation}
 \subsection{Create your experiment directory}
 For every experiment you want to conduct, create a directory that will contain the source files specific to this experiment. As a example, you want to create an experiment named "my\_experiment". First, create a directory \texttt{code/my\_experiment}, in which you will create two subdirectories \texttt{/inc} and \texttt{/src} . You can either create this directory manually, or, in \texttt{code/}, you can run:
@@ -159,7 +162,6 @@ INTEGER, PARAMETER :: NI=96, NJ=160, NK = 32, ngrid=5, maxout=626736, maxint=561
 	\label{tab: multiple_regression}
 \end{table}
 
-
 \subsection{cppdefs.h}
 
 This file defines the different options to be used in the experiment. Again, it is recommended to copy this file into the experiment folder (e.g., \texttt{my\_experiment/inc/} before making any modifications. To include (exclude) an option, use \#define (\#undef) $option\_name$. The file includes 13 options:
@@ -168,7 +170,7 @@ This file defines the different options to be used in the experiment. Again, it 
 	\item[$runtracmass$ :] placeholder
 	\item[$periodic\_ew$ :] placeholder
 	\item[$periodic\_ns$ :] placeholder
-	\item[$allow\_particle$ :] placeholder
+	\item[$allow\_particle$ :] If defined, allows the seeding of particles in the experiment. Please refer to section \fixme{ref to particle section} for a detailed explanation on particle seeding.
 	\item[$rhoonly$ :] If defined, only the density field $rho$ is used. The density field is stored in the salinity array ($s$; see \texttt{evalrho\_rho.f90}). If not defined, $rho$ is computed from the salinity ($s$) and temperature ($T$) fields (see \texttt{evalrho\_sT.f90}).
 	\item[$relaxation$ :] placeholder
 	\item[$fixed\_bottom\_thickness$ :] placeholder
@@ -185,6 +187,17 @@ This file defines the different options to be used in the experiment. Again, it 
 This file defines key parameters relating to the experiment (e.g., grid resolution, time step, diffusion, output, ...). Again, it is recommended to copy this file into the experiment folder (e.g., \texttt{my\_experiment/} before making any modifications. Each parameter in the file is either self-explanatory or include a short description as a comment.
 
 \subsection{Defining the initial conditions}
+Initial conditions can be specified either in the corresponding subroutines, or from an input file. The former approach is used in the Shelfbreak test-case (see Section \ref{sec: Shelfbreak}), where the temperature and salinity distributions are determined from analytical expressions in DO-loops, and only requires a limited knowledge of the model grid. The latter approach can sometimes be more practical, especially when using available data products to initialize the model. However, this approach requires mapping the data used to initialize the experiment to the pre-defined model grid. 
+
+The horizontal grid is relatively straightforward to determine, given the grid size specified in \texttt{my\_experiment/inc/size.h} (i.e., $NI$ and $NJ$), and the grid resolution specified in \texttt{my\_experiment/namelist} (i.e., $dx$ and $dy$). The location of each grid point can be computed using the following equations:
+\begin{align}
+x(i) &= -dx/2 + i dx; &i &= (0, 1 , 2 \ldots NI, NI+1)\\
+y(j) &= -dy/2 + j dy; &j &= (0, 1 , 2 \ldots NJ, NJ+1)
+\end{align}
+
+\subsubsection{Temperature, salinity, and density}
+The initial conditions in the temperature and salinity
+
 
 
 \end{document}
