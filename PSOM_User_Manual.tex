@@ -3,6 +3,7 @@
 
 % LIST OF PACKAGES
 \usepackage{setspace}
+\usepackage{ragged2e}
 \usepackage{graphicx}
 \usepackage{times}              % Improve font over the default
 \usepackage{amssymb,amsmath}		% Package for mathematical equations
@@ -11,13 +12,17 @@
 \usepackage{microtype}          % Subtly improves word spacing
 \usepackage{hyperref}
 \usepackage{listings}			% Displays code lines (highly customizable)
+\usepackage{marginnote}
+\usepackage{geometry}
+\usepackage{pdfpages}
+
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.4,0.4,0.4}
 \definecolor{codepurple}{rgb}{0.58,0,0.82}
 \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
 \lstdefinestyle{mystyle}{
 	backgroundcolor=\color{backcolour},   
-	commentstyle=\color{codegray},
+	commentstyle=\color{codegreen},
 	keywordstyle=\color{magenta},
 	numberstyle=\tiny\color{codegray},
 	stringstyle=\color{codepurple},
@@ -42,9 +47,20 @@
 % The FIXME macro
 \newcommand{\fixme}[1]{\color{red}$<$\textbf{FIX ME: #1}$>$\color{black}}
 
+% GLOSSARY
+\usepackage[nonumberlist, nopostdot]{glossaries}
+% Generate the glossary
+\makeglossaries
 
+%% APPENDIX MARGIN ENVIRONMENT
+%\newenvironment{appendixgeometry}{%
+%\geometry{top=2.5cm, bottom=2.5cm, outer=5cm, inner=2.5cm, heightrounded, marginparwidth=4cm, marginparsep=.5cm}}
+	
 % MAIN DOCUMENT
 \begin{document}
+	
+	\input{PSOMglossarylist.tex}
+	
 	\title{User Manual for PSOM}
 	\author{$\sim$ et. al}
 	\date{2017}
@@ -54,16 +70,163 @@
 \pagebreak
 
 \section{Introduction}
+
+
+FROM README FILE :
+
+* GENERAL DESCRIPTION
+
+PSOM, pronounced "soam" (the nectar derived from the churning of the oceans in Indian mythology), stands for Process Study Ocean Model. 
+It is a versatile, three-dimensional, non-hydrostatic, computational fluid dynamical model for oceanographic (as well as other) applications (Mahadevan et al., 1996a,b). 
+The model uses the finite volume method on a structured grid with boundary fitted coordinates (topography conforming sigma grid in the vertical, and boundary conforming in the horizontal). 
+The model has a free-surface. It can be used for large- and small-scale phenomena and can be run in hydrostatic or non-hydrostatic mode (Mahadevan, 2006). It uses a highly efficient solution procedure that exploits the skewness arising from the small geometrical aspect (depth to length scale) ratio of the ocean to speed up the solution of the non-hydrostatic pressure, which is solved by the multigrid method. 
+
+The model has been used for a number of process studies, including investigation of the vertical transport of nutrients for phytoplankton production (Mahadevan and Archer, 2000) and the dynamics of submesoscale processes (Mahadevan and Tandon, 2006; Mahadevan, Tandon and Ferrari, 2010). Since the non-hydrostatic model is well-posed with open boundaries, it can be used as a nested high-resolution model with time-varying boundary conditions applied from a coarser resolution general circulation model (Mahadevan and Archer, 1998). The model is thus ideally suited for high-resolution, limited-region modeling studies. 
+
+
+
+
 \section{Headstart}
-\section{Configure compile run sequence}
+
+FROM GET\_STARTED\_1
+
+\begin{lstlisting}[language=TeX, breaklines]
+Here is the minimal set of actions required prior to starting using psom.
+
+* step 1: Select the compiler you want to use. To do that, please edit the ./optfile to set the compiler you will use:       fcomp=...  (ifort, pgf95 etc.). If compiler is modified, the user is encouraged to scan through the ./optfile to make other necessary modifications (e.g., the directory of the gotm library if activated, the define\_parallel flag, etc.).
+
+* step 2: By default, psom will produce both binary files and netcdf files. If you do not have netcdf library installed or smply do not want to use netcdf files, 
+
+- edit the file ./optfile          and set define\_netcdf to F.
+- edit the file ./model/inc/cppdef and undefine output\_netcdf variable: 
+\#define file\_output\_cdf   by default
+\#undef file\_output\_cdf    if you do not want to use netcdf.
+
+These two actions will disable the netcdf output. The executable will only produce binary files.
+\end{lstlisting}
+
+\section{Configure, compile, run sequence}
+
+FROM GET\_STARTED\_1
+
+\begin{lstlisting}[language=TeX, breaklines]
+
+Once you have done that, you simply follow the "configure, compile, run" sequence:
+
+* step 3: Configure.
+
+sh tools/configure.sh
+
+* step 4: Compile.
+
+sh tools/compile.sh
+
+* step 5: Run.
+
+./exe/nh $<$ ./namelist\_default
+
+
++  ADDITIONAL INFORMATION
+
+Some explanations:
+
+* About step 3.
+- Step 3 will search for makedepend (which is necessary to create the makefile). The script will stop if makedepend is not installed. The makefile file will only be created if makedepend can be called.
+-> Solution: download makedepend, which is free and widely accessible. For instance, on mac, you can simply sudo port install makedepend (if you have macport installed). 
+- Furthermore, if you chose to use netcdf, an attempt to use nc-config will be tried. Note that the code has only been tested with netcdf4 libraries.
+-> if nc-config is present, it will be used in order to set the links to netcdf libraries appropriately.
+-> if not, you can complete this step yourself by linking the executable to the netcdf libraries. To do so, edit ./optfile before going through step 3.
+
+Step 3 has two effects:
+- ./optfile is modified ,
+- ./namelist is customized.
+
+To sum up, if step 3 fails, the easiest way is to install makedepend and/or to install netcdf libraries (in case you want to use netcdf output). After having done that, repeat step 3. 
+
+
+* Step 4 will 
+- create the makefile in ./mkfile
+- compile
+
+A failure during step 4 most likely indicates that there is an error in the fortran code.
+
+
+* Step 5 will start and run the model.
+By default, the namelist file contains the values of key parameters of the model, that you are likely willing to change. You can of course edit namelist to your convenience and repeat step 5.
+By default, messages will appear on the screen and the output files will go to ../output/.
+\end{lstlisting}
+
+\section{Particle tracking in PSOM}
+PSOM offers the option to release and track particles "online" (i.e., as part of the numerical simulation). To activate this option, the allow\_particle options must be defined in \texttt{inc/cppdefs.h} by including (See Section \ref{sec: cppdefs}):
+\begin{lstlisting}[	basicstyle=\footnotesize, numbers=none]
+#define allow_particle
+\end{lstlisting}
+The particle tracking code has been written for a rectangular grid only, and cannot be used ``as is" for a non-rectangular model grid.
+\subsection{Non-sinking particles}
+While key particle parameters are set in \texttt{namelist} (e.g., particle number, frequency of outputs, etc.; see Section \ref{sec: myparticletracking}), the seeding and advection of particles is controlled by the code included in \texttt{particles.f90}. The file includes the following subroutines:
+
+\begin{itemize}
+	
+	\item[\textit{open\_ parti\_ files}:] This subroutine creates the output files where the particle characteristics will be saved. The number of output files is specified in \texttt{namelist} and must be a factor of the total number of particles ($NPR$). Increasing the number of output files reduced the size of the individual files, which proves to be useful when dealing with a very large number of particles. The output files are unformatted binary files.
+	
+	\item[\textit{save\_ parti}:] This subroutine loops through all the particles and writes the specified variables. The number of variables saved is important, as it must be known to read the unformatted binary output files.
+	
+	\item[\textit{ini\_ particles}:] This subroutine is called when the model timestep matches the particle initialization timestep specified in \texttt{namelist}. This is where the seeding of particle is defined. By default, all particles are released below the surface layer in the middle of the model domain. To personalize the release of particles, see Section \ref{sec: perso_particles}.
+	
+	\item[\textit{get\_ parti\_ vel}:] This subroutine interpolates the physical model's velocity field onto the particles' positions (using \textit{interp\_trilinear}; see below). The \textit{get\_parti\_vel} subroutine also interpolates variables of interest onto the particles position (e.g., salinity, temperature, density, vorticity, etc.).
+	
+	\item[\textit{parti\_ forward}:] This subroutine extrapolates the position of a particle at the next timestep t+1 using a 2$^{nd}$ order Adams-Bashforth scheme. As an example, the position of the particle in the zonal direction is computed using:
+	
+	\begin{equation*}
+(i,j,k)_{t+1}= (i,j,k)_{t} + dtf \times \frac{1}{2}[3(u,v,w)_{t+1} - (u,v,w)_{t}]
+\end{equation*}
+	Where $(i,j,k)$ is the position of the particle in the model space, $dtf$ is the non-dimensional model time step, $(u,v,w)$ is the non-dimensional velocity field at the particle's location, and the subscripts represent the timestep. The corresponding code appears in \texttt{particles.f90} as (e.g., for the particle position in the zonal direction):
+	\begin{lstlisting}[language=fortran]
+! Assign i-position to particle.
+parti(i)%i = parti(i)%i + 0.5d0 * dtf * (3d0 * parti(i)%u - parti(i)%u0)
+\end{lstlisting}
+	At t=0, the velocities are assumed to be zero (set in \textit{ini\_particles}, and the 2$^{nd}$ order Adams-Bashforth scheme simplifies to a one-step Euler scheme.
+	
+	\item[\textit{interp\_trilinear}]	This subroutine is used to interpolate 3D model variables onto a particle's position using a trilinear interpolation technique (e.g., velocities, density, etc.).
+
+	\item[\textit{interp\_bilinear}]	This subroutine is used to interpolate 2D model variables onto a particle's position using a bilinear interpolation technique (e.g., depth of water column).
+\end{itemize}
+
+\subsection{Sinking particles}
+
+The subroutine \textit{get\_ parti\_ vel} includes the possibility to prescribe a vertical sinking velocity to the particles (set to 0 m/s by default). The prescribed velocity must be scaled appropriately to match the scaling used by PSOM. This requires information about the function used to compute the thickness of the model cells in the vertical, defined in \texttt{findzall.f90}. If this function is modified, the code in \texttt{particles.f90} \textbf{must be changed accordingly} (See Appendix \ref{app: particle_sinking} for important information). %(see Section \fixme{theory? Mahadevan 1996?}). 
+Although not implemented in the code, a horizontal velocity (e.g., to simulate swimming behavior) could also be easily prescribed to the particles following a similar method.
+
+\subsection{Reading unformatted binary output files}
+Particle-tracking output files are written as unformatted binary files. Information on how the output file is built is therefore required to be able to access the data. Two MATLAB routines to import or convert the particle-tracking output are provided with the model code:
+\begin{enumerate}
+	\item [--] \texttt{particle\_open\_bin.m}: Imports the particle-tracking data into MATLAB as a 3D matrix (Nbr of particles, model time, \# of recorded variables; see Appendix \ref{app: particles_open_bin}). WARNING: This routine SHOULD NOT BE USED FOR LARGE FILES otherwise the 3D matrix will become too large and will crash MATLAB.
+	\item [--] \texttt{particle\_bin2csv.m}: Converts the particle-tracking data into a CSV-file (see Appendix \ref{app: particle_bin2csv}). This can be helpful when trying to import the particle-tracking data into another software (i.e., into an SQL database).
+	\end{enumerate}
+
 \section{Test Cases}
 \subsection{Wiggles}
 \label{sec: Wiggles}
+\begin{lstlisting}
+- wiggle      : This is a testcase with a wiggling front over a flat topography.  
+\end{lstlisting}
+
 \subsection{NA}
 \label{sec: NA}
+\begin{lstlisting}
+- NA          : This is a much more complex simulation of three fronts that go unstable. This casse has particles and tracers for biology.
+\end{lstlisting}
+
 \subsection{Shelfbreak}
 \label{sec: Shelfbreak}
+\begin{lstlisting}
+- shelfbreak  : Simulation of the Middle Atlantic Bight shelfbreak with a shelf front and a shelfbreak font. The topography includes a sharp slope at the break. It shows how to use the "user" namelist. 
+\end{lstlisting}
+
 \section{Setting up your PSOM simulation}
+
+Write a note about the superceding trick
+
 \subsection{Create your experiment directory}
 For every experiment you want to conduct, create a directory that will contain the source files specific to this experiment. As a example, you want to create an experiment named "my\_experiment". First, create a directory \texttt{code/my\_experiment}, in which you will create two subdirectories \texttt{/inc} and \texttt{/src} . You can either create this directory manually, or, in \texttt{code/}, you can run:
 
@@ -163,7 +326,7 @@ INTEGER, PARAMETER :: NI=96, NJ=160, NK = 32, ngrid=5, maxout=626736, maxint=561
 \end{table}
 
 \subsection{cppdefs.h}
-
+\label{sec: cppdefs}
 This file defines the different options to be used in the experiment. Again, it is recommended to copy this file into the experiment folder (e.g., \texttt{my\_experiment/inc/} before making any modifications. To include (exclude) an option, use \#define (\#undef) $option\_name$. The file includes 13 options:
 
 \begin{enumerate}
@@ -198,7 +361,133 @@ y(j) &= -dy/2 + j dy; &j &= (0, 1 , 2 \ldots NJ, NJ+1)
 \subsubsection{Temperature, salinity, and density}
 The initial conditions in the temperature and salinity
 
+\subsection{Wind stress}
+To specify a customized wind forcing, the code in \texttt{wind\_stress.f90} can be modified. The wind stress at the surface is prescribed to the model through the variables $stress\_top\_x$, $stress\_top\_y$, and $stress\_top$. The dimensions of these three variables are ($NI$,$NJ$) (see \texttt{header.f90}). The surface wind stress can be read from a file: 
 
+\begin{lstlisting}[	basewidth=0.5em, language=fortran]
+! Import the wind stress time series for model forcing
+if (step.eq.1) then
+		open(unit=17, file='youfilefullpath.in')
+		do i=1,nsteps
+				read(17,fmt="(F5.10,F5.10)") stressxTS(i),stressyTS(i)
+		end do
+		close (17)
+		PRINT*,"Read wind stress"
+end if
+stress_top_x = stressxTS(step)
+stress_top_y = stressyTS(step)
+\end{lstlisting}	
+or specified as a constant:
+
+\begin{lstlisting}[	basewidth=0.5em, language=fortran]
+stress_top_x = 0.05d0
+stress_top_y = 0.01d0
+PRINT*,"Read Wind Stress"
+\end{lstlisting}	
+
+If your domain includes solid boundary (i.e., no periodicity), it is recommended to damp the surface wind stress close to the boundaries, to avoid upwelling/downwelling. Below is an example of wind stress damping at the north/south boundaries using a tanh profile. A similar approach can be used in the east/west direction.
+
+\begin{lstlisting}[	basewidth=0.5em, language=fortran]
+! Apply a tanh profile in the meridional direction
+ycenter = 0.5*(yc(NJ)+yc(1))	! Find the middle of the domain
+ywindmin = 10.0 							! Starts damping 10 km from southern boundary
+ywindmax = yc(NJ)-10.d0   	   ! Starts damping 10 km from northern boundary
+edge = 0.06    							! tightnness of the padding in the wind stress
+
+do j=1,NJ
+		if (yc(j).lt.yc(NJ/2)) then
+				stressprofile(j) = 0.5*(tanh(edge*(yc(j)-ywindmin)*PI)+1.d0)
+		else
+				stressprofile(j) = -0.5*(tanh(edge*(yc(j)-ywindmax)*PI)-1.d0)
+		end if
+end do
+
+do j=1,NJ
+		do i=1,NI
+				stress_top_x(i,j) = stressxTS(step)*stressprofile(j)
+				stress_top_y(i,j) = stressyTS(step)*stressprofile(j)
+		end do
+end do
+\end{lstlisting}	
+
+\subsection{Surface Heat Fluxes}
+
+
+
+\subsection{Customizing Particle-tracking in PSOM}
+\label{sec: myparticletracking}
+
+\subsubsection{Parameters in \texttt{namelist}}
+To set up a particle-tracking experiment in PSOM, the allow\_particle option must be defined in \texttt{inc/cppdefs.h} (See Section \ref{sec: cppdefs}):
+\begin{lstlisting}[	basicstyle=\footnotesize, numbers=none]
+#define allow_particle
+\end{lstlisting}
+Four key variables related to particle-tracking are set in the \texttt{namelist} file:
+\begin{enumerate}
+	\item The total number of Particles ($NPR$). $NPR$ must be a multiple of the number of output files (see below).
+	\item The time step at which the particles are released ($ini$\_$particle$\_$time$). $ini$\_$particle$\_$time$ \textbf{must be} greater than 0, or than $pickup$\_$step$ if pickup files are used to initialize the experiment (see Section \ref{sec: namelist} \fixme{Refer to section about namelist and pick up files}). If $ini$\_$particle$\_$time$ = $pickup$\_$step$, no particle output file will be written.
+	\item The number of output files to generate ($parti$\_$file$\_$num$). Increasing the number of files logically decreases the file size. This is especially useful when dealing with a very large number of particles, or when writing particles' position at high frequency. The number of file must be a factor of $NPR$ (see above).
+	\item The frequency of particle outputs ($parti$\_$outfreq$) in number of time steps.
+\end{enumerate}
+
+\subsubsection{\texttt{particles.f90}}
+\label{sec: perso_particles}
+
+\textbf{\indent a. Particle seeding\\}
+
+The seeding and tracking of the particles in PSOM are controlled by subroutines located in \texttt{particles.f90}. To personalize the seeding of particles in the model, the code in the subroutine $ini$\_$particles$ should be altered. By default, the particles are released below the surface layer, in the middle of the model domain:
+
+\begin{lstlisting}[language=fortran]
+! User-defined particle positioning.    
+	DO ip=1, NPR
+		parti(ip)%i=REAL(NI)/2d0 ! mid-domain in x
+		parti(ip)%j=REAL(NJ)/2d0 ! mid-domain in y
+		parti(ip)%k=REAL(NK)-5.  ! sub-surface cell
+
+		! Converts model grid to distances (i,j,k) ==> (x,y,z)
+		parti(ip)%x = parti(ip)%i * dx
+		parti(ip)%y = parti(ip)%j * dy
+		! Assign z-position to particle based on sigma level
+		! Calculate the scaled z-depth
+		CALL sigma2z(parti(ip)%i,parti(ip)%j,parti(ip)%k,swap1)
+		parti(ip)%z = swap1 * DL
+	ENDDO
+\end{lstlisting}
+\textbf{\indent b. Sinking velocity\\}
+
+A sinking velocity can be prescribed to the particles (default = 0 m/s) by modifying the following line of code in $get$\_$parti$\_$vel$:
+
+\begin{lstlisting}[language=fortran]
+! Then, specify the sinking velocity (in m/s), including the scaling factors
+	parti(ip)%wsink= -0d0/86400d0/WL*parti(ip)%wzf*EPS  ! 0 m/day
+\end{lstlisting}
+
+% The subroutine $save$\_$parti()$ can be edited to customize the number of variables written to the particle output file. %To remove a variable from the output files, simply comment out the corresponding line. %Variables can also be added to the list, although it will require a better understanding of how the physical and particle models operate, as many other changes to the code
+
+\pagebreak
+\appendix
+%\newgeometry{top=2.5cm, bottom=2.5cm, outer=5cm, inner=2cm, heightrounded, marginparwidth=3.7cm, marginparsep=.1cm}
+%\input{appendices/particle_sinking_velocity}
+%\restoregeometry
+\section*{Appendix A}
+\label{app: particle_sinking}
+\includepdf[pages={1-3}]{appendices/notes_on_sinking_velocity.pdf}
+
+\section*{Appendix B - particle\_open\_bin.m}
+\label{app: particle_open_bin}
+\input{appendices/particle_open_bin.tex}
+\pagebreak
+
+\section*{Appendix C - particle\_bin2csv}
+\label{app: particle_bin2csv}
+\input{appendices/particle_bin2csv.tex}
+
+%Print the glossary
+\pagebreak
+\glsaddall				% Include all glossary entries
+\glossarystyle{listhypergroup}	% Define style for glossary
+\renewcommand*{\arraystretch}{0.3}% default is 1
+\printglossaries
 
 \end{document}
 
