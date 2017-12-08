@@ -200,7 +200,7 @@ Although not implemented in the code, a horizontal velocity (e.g., to simulate s
 \subsection{Reading unformatted binary output files}
 Particle-tracking output files are written as unformatted binary files. Information on how the output file is built is therefore required to be able to access the data. Two MATLAB routines to import or convert the particle-tracking output are provided with the model code:
 \begin{enumerate}
-	\item [--] \texttt{particle\_open\_bin.m}: Imports the particle-tracking data into MATLAB as a 3D matrix (Nbr of particles, model time, \# of recorded variables; see Appendix \ref{app: particles_open_bin}). WARNING: This routine SHOULD NOT BE USED FOR LARGE FILES otherwise the 3D matrix will become too large and will crash MATLAB.
+	\item [--] \texttt{particle\_open\_bin.m}: Imports the particle-tracking data into MATLAB as a 3D matrix (Nbr of particles, model time, \# of recorded variables; see Appendix \ref{app: particle_open_bin}). WARNING: This routine SHOULD NOT BE USED FOR LARGE FILES otherwise the 3D matrix will become too large and will crash MATLAB.
 	\item [--] \texttt{particle\_bin2csv.m}: Converts the particle-tracking data into a CSV-file (see Appendix \ref{app: particle_bin2csv}). This can be helpful when trying to import the particle-tracking data into another software (i.e., into an SQL database).
 	\end{enumerate}
 
@@ -282,8 +282,8 @@ ifort preproc.f90 -o preproc
 	
 	\item Runs \texttt{preproc.f90} and fill the values that are asked:
 \begin{lstlisting}[language=sh]
-# Runs preproc.f90
-./preproc.f90
+# Runs preproc
+./preproc
 \end{lstlisting}	
 
 \item Copy/Paste the last line the program provides in \texttt{my\_experiment/inc/size.h}. Below is an example for $NI=96$, $NJ=160$, and $NK=32$ (hence $ngrid=5$, see Table \ref{tab: ngrid}):
@@ -303,7 +303,7 @@ m,ntint,ntout,nbc(m) 1      491520      539784       47104
 m,ntint,ntout,nbc(m) 2       61440       73800       11776
 m,ntint,ntout,nbc(m) 3        7680       10920        2944
 m,ntint,ntout,nbc(m) 4         960        1848         736
-m,ntint,ntout,nbc(m) 5         120         384         184
+m,ntint,ntout,nbc(m) 5         120         384         184	
 Copy the following line to size.h
 INTEGER, PARAMETER :: NI=96, NJ=160, NK = 32, ngrid=5, maxout=626736, maxint=561720, int1=491520
 \end{lstlisting}	
@@ -469,16 +469,18 @@ A sinking velocity can be prescribed to the particles (default = 0 m/s) by modif
 %\newgeometry{top=2.5cm, bottom=2.5cm, outer=5cm, inner=2cm, heightrounded, marginparwidth=3.7cm, marginparsep=.1cm}
 %\input{appendices/particle_sinking_velocity}
 %\restoregeometry
-\section*{Appendix A}
+%\renewcommand{\thesection}{\Alph{section}}
+
+\section{Appendix A}
 \label{app: particle_sinking}
 \includepdf[pages={1-3}]{appendices/notes_on_sinking_velocity.pdf}
 
-\section*{Appendix B - particle\_open\_bin.m}
+\section{Appendix B - particle\_open\_bin.m}
 \label{app: particle_open_bin}
 \input{appendices/particle_open_bin.tex}
 \pagebreak
 
-\section*{Appendix C - particle\_bin2csv}
+\section{Appendix C - particle\_bin2csv}
 \label{app: particle_bin2csv}
 \input{appendices/particle_bin2csv.tex}
 
