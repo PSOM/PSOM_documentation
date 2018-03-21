@@ -101,7 +101,7 @@ Instead of relying on an interpolation of the discrete values of $wzf$, the cont
        zc(i,j,k)= (exp(pfac*xfac)-1.d0)*epm1inv*(D(i,j)+dztop) -dztop
 \end{lstlisting}
 which can be re-written in terms of set parameters as:
-\marginnote{\justifying \small \textbf{\underline{What is the constant C?}}\\The value of $C$ is irrelevant in this context, as the difference between two z-levels is the quantity we are ultimately interested in.}
+\marginnote{\raggedright \small \textbf{\underline{What is the constant C?}}\\The value of $C$ is irrelevant in this context, as the difference between two z-levels is the quantity we are ultimately interested in.}
 
 \begin{equation} \label{eq: zc}
 zc(i,j,k) = \left(\frac{D(i,j)+dztop}{e^{pfac}-1}\right)e^{pfac}e^{\frac{-pfac(k-0.5)}{NK-1}} + C 
