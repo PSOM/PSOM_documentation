@@ -62,9 +62,9 @@
 	
 	\input{PSOMglossarylist.tex}
 	
-	\title{User Manual for PSOM}
-	\author{$\sim$ et. al}
-	\date{2017}
+	\title{User Manual for PSOM\\[.5cm] \includegraphics[width =\linewidth]{PSOM_cover_photo}}
+	\author{Ocean and Environmental Processes\\ Dr. Amala Mahadevan's Lab\\ {\small Compiled by M. Dever}}
+	\date{\today}
 	\maketitle
 
 \tableofcontents
@@ -73,9 +73,9 @@
 \section{Introduction}
 
 
-FROM README FILE :
+%FROM README FILE :
 
-* GENERAL DESCRIPTION
+%* GENERAL DESCRIPTION
 
 PSOM, pronounced "soam" (the nectar derived from the churning of the oceans in Indian mythology), stands for Process Study Ocean Model. 
 It is a versatile, three-dimensional, non-hydrostatic, computational fluid dynamical model for oceanographic (as well as other) applications (Mahadevan et al., 1996a,b). 
@@ -125,7 +125,11 @@ Before being able to compile PSOM, a few necessary steps must be taken:
 \begin{lstlisting}[language=sh, breaklines]
 		sh tools/configure.sh
 \end{lstlisting}
-Running \texttt{configure.sh} will search for makedepend (which is necessary to create the makefile). The script will stop if makedepend is not installed. The makefile file will only be created if makedepend can be called. Therefore, the user should download makedepend, which is free and widely accessible. For instance, on mac, you can simply sudo port install makedepend (if you have macport installed). Furthermore, if you chose to use netcdf, an attempt to use nc-config will be tried. If nc-config is present, it will be used in order to set the links to netcdf libraries appropriately; If not, you can complete this step yourself by linking the executable to the netcdf libraries. To do so, edit ./optfile before going to the next step.
+Running \texttt{configure.sh} will search for makedepend (which is necessary to create the makefile). The script will stop if makedepend is not installed. The makefile file will only be created if makedepend can be called. Therefore, the user should download makedepend, which is free and widely accessible. For instance, on mac, you can simply type (if you have macport installed):
+\begin{lstlisting}[language=sh, breaklines]
+ sudo port install makedepend
+\end{lstlisting}
+If you chose to use netcdf, an attempt to use nc-config will be tried. If nc-config is present, it will be used in order to set the links to netcdf libraries appropriately; If not, you can complete this step yourself by linking the executable to the netcdf libraries. To do so, edit ./optfile before going to the next step.
 
 To summarize, This step has 2 effects: (1) modify \texttt{optfile}, and (2) customize \texttt{namelist}. Failures in running \texttt{configure.sh} can likely be avoided by correctly installing makedepend and/or netcdf libraries.
 
@@ -179,7 +183,7 @@ After properly setting-up PSOM, you can simply follow the "clean, compile, run" 
 \subsection{Create your experiment directory}
 \marginnote{\raggedright \small \textbf{\underline{Superseding trick}}\\When compiling, priority is given to the routines present in the experiment folder, over the source code present in \texttt{model/src/}. For example, if the wiggle experiment is compiled, any routines located in \texttt{wiggle/src/} will be used over the matching routines located in \texttt{model/src/}.}
 
-For every experiment you want to conduct, create a directory that will contain the source files specific to this experiment. As a example, you want to create an experiment named "my\_experiment". First, create a directory \texttt{my\_experiment/}, in which you will create two subdirectories \texttt{my\_experiment/inc} and \\\texttt{my\_experiment/src} . You can either create this directory manually, or you can run:
+For every experiment you want to conduct, create a directory that will contain the source files specific to this experiment. As an example, let's say you want to create an experiment named "my\_experiment". First, create a directory \texttt{my\_experiment/}, in which you will create two subdirectories \texttt{my\_experiment/inc} and \\\texttt{my\_experiment/src} . You can either create these directories manually, or you can run:
 
 \begin{lstlisting}[language=sh]
 # Copies the template directory

@@ -1,0 +1,15 @@
+
+*.aux
+*.aux
+*.glo
+*.ist
+*.out
+*.gz
+PSOM_User_Manual.aux
+PSOM_User_Manual.glsdefs
+PSOM_User_Manual.log
+PSOM_User_Manual.out
+PSOM_User_Manual.synctex.gz
+PSOM_User_Manual.toc
+*.toc
+PSOM_User_Manual.aux
