@@ -2,6 +2,7 @@
 % Test comment added to lowryk local version - 3 May 2017
 
 % LIST OF PACKAGES
+\usepackage{hyperref}
 \usepackage{setspace}
 \usepackage{ragged2e}
 \usepackage{graphicx}
@@ -472,6 +473,58 @@ A sinking velocity can be prescribed to the particles (default = 0 m/s) by modif
 \end{lstlisting}
 
 % The subroutine $save$\_$parti()$ can be edited to customize the number of variables written to the particle output file. %To remove a variable from the output files, simply comment out the corresponding line. %Variables can also be added to the list, although it will require a better understanding of how the physical and particle models operate, as many other changes to the code
+
+\section{Coupling PSOM with GOTM}
+PSOM can be coupled with the 1D water column general ocean turbulence model (GOTM) if you would like to use various mixing schemes such as KPP, $K-\epsilon,$ etc. 
+
+\subsection{Compile GOTM}
+\begin{enumerate}
+    \item First, download GOTM from \href{https://gotm.net/}{https://gotm.net/}
+    \item Set up the following 2 environmental variables in your \texttt{.bashrc} ~(or \texttt{.bash\_profile}), which should reside in your home directory
+    
+    \begin{lstlisting}[language=sh, breaklines]
+export  FORTRAN_COMPILER=IFORT
+export GOTMDIR=/home/sr71d/PSOM/github/psom-gotm/gotm-4.0.0
+
+# the GOTMDIR variable should contain the directory where you build gotm
+\end{lstlisting}
+    
+    \item Within \text{src}, type the following commands:
+    
+    \begin{lstlisting}[language=sh, breaklines]
+    make distclean  # this removes libraries from previous compilations
+    make            # this creates fresh libraries on your machine
+    \end{lstlisting}
+
+    \item After the previous step, there should be libraries in the \texttt{lib} folder. If you use the intel fortran compiler, the libraries will be in the \texttt{lib/IFORT} folder. If you use the gfortran compiler, the libraries will be created in \texttt{lib/gfortran}. The following libraries should have been created:
+    
+    \begin{lstlisting}[language=bash, breaklines]
+    libairsea_prod.a  libmeanflow_prod.a  libseagrass_prod.a  
+    libbio_prod.a   libobservations_prod.a   libturbulence_prod.a   
+    libgotm_prod.a   liboutput_prod.a  libutil_prod.a
+    \end{lstlisting}
+
+    If you see the above GOTM libraries are builts, congrats! Now we can move on to compiling PSOM with GOTM.
+\end{enumerate}
+
+\subsection{Compiling PSOM with GOTM}
+There are a few options we need to change in order to couple GOTM and PSOM. In PSOM, we need to:
+\begin{enumerate}
+    \item In the \texttt{optfile}, set \texttt{define-gotm = T} and specify the path to where the gotm libraries are found
+    \item Make a new experiment in PSOM, and in the \texttt{inc/cppdefs.h} file, make sure the following options are selected:
+    \begin{lstlisting}[	basicstyle=\footnotesize, numbers=none]
+    #define gotm_call
+    #define implicit
+    \end{lstlisting}
+    \item From here, clean, compile, and execute the experiment as normal. 
+\end{enumerate}
+
+\subsection{Other notes}
+\begin{itemize}
+    \item To switch between different turbulence models, change the ``turb\_method'' flag in the \texttt{gotmturb.nml} file.
+    \item If the flag is set to KPP, may need an additional input file to define parameters (see \href{https://github.com/PSOM/V1.0/blob/master/code/gotmturb.nml}{ https://github.com/PSOM/V1.0/blob/master/code/gotmturb.nml})
+    \item right now, running PSOM with implicit mixing is much slower than explicit mixing. 
+\end{itemize}
 
 \pagebreak
 \appendix
