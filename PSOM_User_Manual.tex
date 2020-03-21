@@ -370,6 +370,12 @@ end do
 
 \subsection{Surface Heat Fluxes}
 
+\subsection{Adding your own modules}
+If you want to add additional scripts to PSOM, they need to be added to the optfile in order to be recognized by the compiler. You can do this using a file `optfile$\_$add' that is placed at the same level as your namelist (and src and inc folders). Within this file, place the command 
+\begin{lstlisting}[	basicstyle=\footnotesize, numbers=none]
+lobj$\_$additional=script1.o script2.o
+\end{lstlisting}
+
 \section{Particle tracking in PSOM}
 PSOM offers the option to release and track particles "online" (i.e., as part of the numerical simulation). To activate this option, the allow\_particle options must be defined in \texttt{inc/cppdefs.h} by including (See Section \ref{sec: cppdefs}):
 \begin{lstlisting}[	basicstyle=\footnotesize, numbers=none]
