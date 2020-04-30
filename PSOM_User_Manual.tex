@@ -136,6 +136,13 @@ To summarize, This step has 2 effects: (1) modify \texttt{optfile}, and (2) cust
 
 \end{itemize}
 
+\subsection{Getting started with PSOM on Poseidon}
+If you are using Poseidon (the WHOI HPC system) to run PSOM, start by copying the PSOM folder in the `share/mahadevanlab' folder to your scratch directory. Then, edit the directory where PSOM has been installed to your scratch directory ``dirc=/vortexfs1/scratch/[username]/PSOM''. Next, run
+\begin{lstlisting}[language=sh, breaklines]
+		sh tools/configure.sh
+\end{lstlisting}
+You can now continue with the next section
+
 \section{Running PSOM}
 \label{sec: cleanconmpilerun}
 After properly setting-up PSOM, you can simply follow the "clean, compile, run" sequence:
