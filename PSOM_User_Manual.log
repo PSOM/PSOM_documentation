@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  30 APR 2020 12:51
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  20 MAY 2020 17:03
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -411,6 +411,29 @@ Package: geometry 2010/09/12 v5.6 Page Geometry
 \Gm@layoutvoffset=\dimen156
 \Gm@dimlist=\toks25
 )
+(/usr/local/texlive/2015/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2007/01/21 v2.11 LaTeX color extensions (UK)
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/latexconfig/color.cfg
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package xcolor Info: Driver file: pdftex.def on input line 225.
+LaTeX Info: Redefining \color on input line 702.
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1337.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1341.
+Package xcolor Info: Model `RGB' extended on input line 1353.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1355.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1356.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1357.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1358.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1359.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1360.
+)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/colortbl/colortbl.sty
+Package: colortbl 2012/02/13 v1.0a Color table columns (DPC)
+\everycr=\toks26
+\minrowclearance=\skip67
+)
 (/usr/local/texlive/2015/texmf-dist/tex/latex/glossaries/base/glossaries.sty
 Package: glossaries 2015/03/16 v4.15 (NLCT)
 
@@ -419,8 +442,8 @@ Package: xkeyval 2014/12/03 v2.7a package option processing (HA)
 
 (/usr/local/texlive/2015/texmf-dist/tex/generic/xkeyval/xkeyval.tex
 (/usr/local/texlive/2015/texmf-dist/tex/generic/xkeyval/xkvutils.tex
-\XKV@toks=\toks26
-\XKV@tempa@toks=\toks27
+\XKV@toks=\toks27
+\XKV@tempa@toks=\toks28
 )
 \XKV@depth=\count133
 File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
@@ -432,8 +455,8 @@ Package: mfirstuc 2015/02/03 v1.10 (NLCT)
 Package: etoolbox 2015/05/04 v2.2 e-TeX tools for LaTeX (JAW)
 \etb@tempcnta=\count134
 )
-\@glsmfirst=\toks28
-\@glsmrest=\toks29
+\@glsmfirst=\toks29
+\@glsmrest=\toks30
 )
 (/usr/local/texlive/2015/texmf-dist/tex/latex/textcase/textcase.sty
 Package: textcase 2004/10/07 v0.07 Text only upper/lower case changing (DPC)
@@ -499,9 +522,9 @@ Package: fp-upn 1996/10/21
 (/usr/local/texlive/2015/texmf-dist/tex/latex/fp/fp-eval.sty
 Package: fp-eval 1995/04/03
 )))
-\@dtl@toks=\toks30
+\@dtl@toks=\toks31
 \@dtl@tmpcount=\count147
-\dtl@tmplength=\skip67
+\dtl@tmplength=\skip68
 \dtl@sortresult=\count148
 \@dtl@numgrpsepcount=\count149
 \@dtl@datatype=\count150
@@ -514,12 +537,12 @@ ible-307.sty
 Package: glossaries-compatible-307 2013/11/14 v4.0 (NLCT)
 )
 \gls@level=\count154
-\@gls@tmpb=\toks31
-\gls@tmplen=\skip68
-\glskeylisttok=\toks32
-\glslabeltok=\toks33
-\glsshorttok=\toks34
-\glslongtok=\toks35
+\@gls@tmpb=\toks32
+\gls@tmplen=\skip69
+\glskeylisttok=\toks33
+\glslabeltok=\toks34
+\glsshorttok=\toks35
+\glslongtok=\toks36
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/glossaries/styles/glossary-hypern
 av.sty
@@ -528,17 +551,17 @@ Package: glossary-hypernav 2013/11/14 v4.0 (NLCT)
 (/usr/local/texlive/2015/texmf-dist/tex/latex/glossaries/styles/glossary-list.s
 ty
 Package: glossary-list 2015/02/03 v4.13 (NLCT)
-\glslistdottedwidth=\skip69
+\glslistdottedwidth=\skip70
 )
 (/usr/local/texlive/2015/texmf-dist/tex/latex/glossaries/styles/glossary-long.s
 ty
 Package: glossary-long 2013/11/14 v4.0 (NLCT)
  (/usr/local/texlive/2015/texmf-dist/tex/latex/tools/longtable.sty
 Package: longtable 2014/10/28 v4.11 Multi-page Table package (DPC)
-\LTleft=\skip70
-\LTright=\skip71
-\LTpre=\skip72
-\LTpost=\skip73
+\LTleft=\skip71
+\LTright=\skip72
+\LTpre=\skip73
+\LTpost=\skip74
 \LTchunksize=\count155
 \LTcapwidth=\dimen157
 \LT@head=\box32
@@ -549,10 +572,10 @@ Package: longtable 2014/10/28 v4.11 Multi-page Table package (DPC)
 \LT@rows=\count157
 \c@LT@tables=\count158
 \c@LT@chunks=\count159
-\LT@p@ftn=\toks36
+\LT@p@ftn=\toks37
 )
-\glsdescwidth=\skip74
-\glspagelistwidth=\skip75
+\glsdescwidth=\skip75
+\glspagelistwidth=\skip76
 )
 (/usr/local/texlive/2015/texmf-dist/tex/latex/glossaries/styles/glossary-super.
 sty
@@ -561,9 +584,9 @@ Package: glossary-super 2013/11/14 v4.0 (NLCT)
 Package: supertabular 2004/02/20 v4.1e the supertabular environment
 \c@tracingst=\count160
 \ST@wd=\dimen158
-\ST@rightskip=\skip76
-\ST@leftskip=\skip77
-\ST@parfillskip=\skip78
+\ST@rightskip=\skip77
+\ST@leftskip=\skip78
+\ST@parfillskip=\skip79
 \ST@pageleft=\dimen159
 \ST@headht=\dimen160
 \ST@tailht=\dimen161
@@ -579,38 +602,38 @@ Package: supertabular 2004/02/20 v4.1e the supertabular environment
 (/usr/local/texlive/2015/texmf-dist/tex/latex/glossaries/styles/glossary-tree.s
 ty
 Package: glossary-tree 2015/02/03 v4.13 (NLCT)
-\glstreeindent=\skip79
+\glstreeindent=\skip80
 ))
 \glswrite=\write3
 \glo@main@file=\write4
 \openout4 = `PSOM_User_Manual.glo'.
 
 Package glossaries Info: Writing glossary file PSOM_User_Manual.glo on input li
-ne 55.
+ne 61.
  (./PSOM_User_Manual.aux)
 \openout1 = `PSOM_User_Manual.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 62.
-LaTeX Font Info:    ... okay on input line 62.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 62.
-LaTeX Font Info:    ... okay on input line 62.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 62.
-LaTeX Font Info:    ... okay on input line 62.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 62.
-LaTeX Font Info:    ... okay on input line 62.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 62.
-LaTeX Font Info:    ... okay on input line 62.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 62.
-LaTeX Font Info:    ... okay on input line 62.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 62.
-LaTeX Font Info:    ... okay on input line 62.
-LaTeX Font Info:    Try loading font information for OT1+ptm on input line 62.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 68.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 )
 \AtBeginShipoutBox=\box37
-Package hyperref Info: Link coloring OFF on input line 62.
+Package hyperref Info: Link coloring OFF on input line 68.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
@@ -620,9 +643,9 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
 \c@section@level=\count161
 )
-LaTeX Info: Redefining \ref on input line 62.
-LaTeX Info: Redefining \pageref on input line 62.
-LaTeX Info: Redefining \nameref on input line 62.
+LaTeX Info: Redefining \ref on input line 68.
+LaTeX Info: Redefining \pageref on input line 68.
+LaTeX Info: Redefining \nameref on input line 68.
 
 (./PSOM_User_Manual.out) (./PSOM_User_Manual.out)
 \@outlinefile=\write5
@@ -630,7 +653,7 @@ LaTeX Info: Redefining \nameref on input line 62.
 
 
 ABD: EverySelectfont initializing macros
-LaTeX Info: Redefining \selectfont on input line 62.
+LaTeX Info: Redefining \selectfont on input line 68.
 
 (/usr/local/texlive/2015/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -639,12 +662,12 @@ LaTeX Info: Redefining \selectfont on input line 62.
 \scratchbox=\box38
 \nofMPsegments=\count163
 \nofMParguments=\count164
-\everyMPshowfont=\toks37
+\everyMPshowfont=\toks38
 \MPscratchCnt=\count165
 \MPscratchDim=\dimen170
 \MPnumerator=\count166
 \makeMPintoPDFobject=\count167
-\everyMPtoPDFconversion=\toks38
+\everyMPtoPDFconversion=\toks39
 ) (/usr/local/texlive/2015/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
 
@@ -669,7 +692,7 @@ Package: ltcaption 2013/02/03 v1.3-62 longtable captions (AR)
 )
 Package caption Info: supertabular package is loaded.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Info: Redefining \microtypecontext on input line 62.
+LaTeX Info: Redefining \microtypecontext on input line 68.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
@@ -730,14 +753,14 @@ Package marginnote Info: \pdfoutput not 0 and \pdflastxpos available.
 File: PSOM_cover_photo.png Graphic file (type png)
 
 <use PSOM_cover_photo.png>
-Package pdftex.def Info: PSOM_cover_photo.png used on input line 70.
+Package pdftex.def Info: PSOM_cover_photo.png used on input line 76.
 (pdftex.def)             Requested size: 400.89934pt x 204.40144pt.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/microtype/mt-cmr.cfg
 File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman 
 (RS)
 )
-LaTeX Font Info:    Try loading font information for U+msa on input line 70.
+LaTeX Font Info:    Try loading font information for U+msa on input line 76.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
@@ -745,7 +768,7 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 (/usr/local/texlive/2015/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 70.
+LaTeX Font Info:    Try loading font information for U+msb on input line 76.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -759,7 +782,7 @@ File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 {/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./PSOM_
 cover_photo.png>]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <17.28> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 71.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 77.
  (./PSOM_User_Manual.toc
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1.
@@ -780,59 +803,59 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.73 
+l.79 
       [1]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 104.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 110.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 104.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 110.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 104.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 110.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 104.
+(hyperref)                removing `math shift' on input line 110.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 104.
+(hyperref)                removing `math shift' on input line 110.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2014/09/06 1.5e listings language file
 ) [2]
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 113.
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 119.
 
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 113.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 119.
 LaTeX Font Info:    Font shape `OT1/pcr/bx/n' in size <14.4> not available
-(Font)              Font shape `OT1/pcr/b/n' tried instead on input line 117.
+(Font)              Font shape `OT1/pcr/b/n' tried instead on input line 125.
 LaTeX Font Info:    Font shape `OT1/pcr/bx/n' in size <12> not available
-(Font)              Font shape `OT1/pcr/b/n' tried instead on input line 122.
+(Font)              Font shape `OT1/pcr/b/n' tried instead on input line 130.
  [3]
-LaTeX Font Info:    Try loading font information for OML+ptm on input line 167.
+LaTeX Font Info:    Try loading font information for OML+ptm on input line 175.
 
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/omlptm.fd
 File: omlptm.fd 
 )
 LaTeX Font Info:    Font shape `OML/ptm/m/n' in size <10.95> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 167.
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 175.
  [4]
 Package marginnote Info: Margin note 6.1 is on absolute page 6
-(marginnote)              on input line 193.
-Package marginnote Info: right page because not two side mode on input line 193
+(marginnote)              on input line 201.
+Package marginnote Info: right page because not two side mode on input line 201
 .
 Package marginnote Info: xpos seems to be 71.13188pt,
-(marginnote)             \marginnoterightadjust ignored on input line 193.
+(marginnote)             \marginnoterightadjust ignored on input line 201.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 193.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 201.
  [5]
 [6]
-Overfull \hbox (22.78162pt too wide) in paragraph at lines 252--253
+Overfull \hbox (22.78162pt too wide) in paragraph at lines 260--261
 []\OT1/ptm/m/n/12 (-20) Copy/Paste the last line the pro-gram pro-vides in \OT1
 /pcr/m/n/12 my[]experiment/inc/size.h\OT1/ptm/m/n/12 (-20) .
  []
@@ -844,27 +867,27 @@ File: lstlang1.sty 2014/09/06 1.5e listings language file
 File: lstlang1.sty 2014/09/06 1.5e listings language file
 ) [9]
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 383.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 391.
 
 [10] [11] [12]
-Overfull \hbox (41.41698pt too wide) in paragraph at lines 446--447
+Overfull \hbox (41.41698pt too wide) in paragraph at lines 454--455
 []\OT1/ptm/m/n/12 (-20) The time step at which the par-ti-cles are re-leased ($
 \OML/cmm/m/it/12 ini$[]$particle$[]$time$\OT1/ptm/m/n/12 (-20) ). $\OML/cmm/m/i
 t/12 ini$[]$particle$[]$time$
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 454--455
+Underfull \hbox (badness 10000) in paragraph at lines 462--463
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 479--480
+Underfull \hbox (badness 10000) in paragraph at lines 487--488
 
  []
 
 [13]
-Overfull \hbox (48.81273pt too wide) in paragraph at lines 496--497
+Overfull \hbox (48.81273pt too wide) in paragraph at lines 504--505
 []\OT1/ptm/m/n/12 (-20) Set up the fol-low-ing 2 en-vi-ron-men-tal vari-ables i
 n your \OT1/pcr/m/n/12 .bashrc  \OT1/ptm/m/n/12 (-20) (or \OT1/pcr/m/n/12 .bash
 []profile\OT1/ptm/m/n/12 (-20) ),
@@ -874,126 +897,192 @@ n your \OT1/pcr/m/n/12 .bashrc  \OT1/ptm/m/n/12 (-20) (or \OT1/pcr/m/n/12 .bash
 File: lstlang1.sty 2014/09/06 1.5e listings language file
 ) [14]
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 537.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 545.
 
-[15] <appendices/notes_on_sinking_velocity.pdf, id=453, 614.295pt x 794.97pt>
+[15]
+
+LaTeX Warning: Reference `eq:z' on page 16 undefined on input line 564.
+
+
+LaTeX Warning: Reference `eq:z' on page 16 undefined on input line 564.
+
+
+Overfull \hbox (17.39304pt too wide) in paragraph at lines 564--564
+[]\OT1/ptm/m/n/12 (-20) In the code, $\OML/cmm/m/it/12 ^^[$ \OT1/ptm/m/n/12 (-2
+0) is cal-cu-lated in two sub-rou-tines: []stat-ic-sigma.f90[] and []sigma[]top
+layer.f90[].
+ []
+
+
+LaTeX Warning: Reference `eq:wz' on page 16 undefined on input line 594.
+
+[16pdfTeX warning (ext4): destination with the same identifier (name{equation.9
+.4}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.609 ...ew grids are as sketched in Figure 2.\par
+                                                  pdfTeX warning (ext4): destin
+ation with the same identifier (name{equation.9.4}) has been already used, dupl
+icate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.609 ...ew grids are as sketched in Figure 2.\par
+                                                  pdfTeX warning (ext4): destin
+ation with the same identifier (name{equation.9.4}) has been already used, dupl
+icate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.609 ...ew grids are as sketched in Figure 2.\par
+                                                  pdfTeX warning (ext4): destin
+ation with the same identifier (name{equation.9.4}) has been already used, dupl
+icate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.609 ...ew grids are as sketched in Figure 2.\par
+                                                  ]
+
+LaTeX Warning: Reference `eq:z' on page 17 undefined on input line 618.
+
+
+LaTeX Warning: Reference `eq:z_upper' on page 17 undefined on input line 623.
+
+
+LaTeX Warning: Reference `eq:z' on page 17 undefined on input line 629.
+
+
+LaTeX Warning: Reference `eq:z_lower' on page 17 undefined on input line 634.
+
+[17] <appendices/notes_on_sinking_velocity.pdf, id=474, 614.295pt x 794.97pt>
 File: appendices/notes_on_sinking_velocity.pdf Graphic file (type pdf)
 
 <use appendices/notes_on_sinking_velocity.pdf>
 Package pdftex.def Info: appendices/notes_on_sinking_velocity.pdf used on input
- line 551.
+ line 671.
 (pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
 File: appendices/notes_on_sinking_velocity.pdf Graphic file (type pdf)
 
 <use appendices/notes_on_sinking_velocity.pdf>
 Package pdftex.def Info: appendices/notes_on_sinking_velocity.pdf used on input
- line 551.
+ line 671.
 (pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
 
-<appendices/notes_on_sinking_velocity.pdf, id=456, page=1, 614.295pt x 794.97pt
+<appendices/notes_on_sinking_velocity.pdf, id=477, page=1, 614.295pt x 794.97pt
 >
 File: appendices/notes_on_sinking_velocity.pdf Graphic file (type pdf)
  <use appendices/notes_on_sinking_velocity.pdf, page 1>
 Package pdftex.def Info: appendices/notes_on_sinking_velocity.pdf, page1 used o
-n input line 551.
+n input line 671.
 (pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
 File: appendices/notes_on_sinking_velocity.pdf Graphic file (type pdf)
 
 <use appendices/notes_on_sinking_velocity.pdf, page 1>
 Package pdftex.def Info: appendices/notes_on_sinking_velocity.pdf, page1 used o
-n input line 551.
+n input line 671.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: appendices/notes_on_sinking_velocity.pdf Graphic file (type pdf)
 
 <use appendices/notes_on_sinking_velocity.pdf, page 1>
 Package pdftex.def Info: appendices/notes_on_sinking_velocity.pdf, page1 used o
-n input line 551.
+n input line 671.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: appendices/notes_on_sinking_velocity.pdf Graphic file (type pdf)
 
 <use appendices/notes_on_sinking_velocity.pdf, page 1>
 Package pdftex.def Info: appendices/notes_on_sinking_velocity.pdf, page1 used o
-n input line 551.
+n input line 671.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
- [16]
-<appendices/notes_on_sinking_velocity.pdf, id=461, page=2, 614.295pt x 794.97pt
+ [18]
+<appendices/notes_on_sinking_velocity.pdf, id=483, page=2, 614.295pt x 794.97pt
 >
 File: appendices/notes_on_sinking_velocity.pdf Graphic file (type pdf)
  <use appendices/notes_on_sinking_velocity.pdf, page 2>
 Package pdftex.def Info: appendices/notes_on_sinking_velocity.pdf, page2 used o
-n input line 551.
+n input line 671.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: appendices/notes_on_sinking_velocity.pdf Graphic file (type pdf)
 
 <use appendices/notes_on_sinking_velocity.pdf, page 2>
 Package pdftex.def Info: appendices/notes_on_sinking_velocity.pdf, page2 used o
-n input line 551.
+n input line 671.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: appendices/notes_on_sinking_velocity.pdf Graphic file (type pdf)
 
 <use appendices/notes_on_sinking_velocity.pdf, page 1>
 Package pdftex.def Info: appendices/notes_on_sinking_velocity.pdf, page1 used o
-n input line 551.
+n input line 671.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
- [17 <./appendices/notes_on_sinking_velocity.pdf>]
-<appendices/notes_on_sinking_velocity.pdf, id=518, page=3, 614.295pt x 794.97pt
+ [19 <./appendices/notes_on_sinking_velocity.pdf>]
+<appendices/notes_on_sinking_velocity.pdf, id=540, page=3, 614.295pt x 794.97pt
 >
 File: appendices/notes_on_sinking_velocity.pdf Graphic file (type pdf)
  <use appendices/notes_on_sinking_velocity.pdf, page 3>
 Package pdftex.def Info: appendices/notes_on_sinking_velocity.pdf, page3 used o
-n input line 551.
+n input line 671.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: appendices/notes_on_sinking_velocity.pdf Graphic file (type pdf)
 
 <use appendices/notes_on_sinking_velocity.pdf, page 3>
 Package pdftex.def Info: appendices/notes_on_sinking_velocity.pdf, page3 used o
-n input line 551.
+n input line 671.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
 File: appendices/notes_on_sinking_velocity.pdf Graphic file (type pdf)
 
 <use appendices/notes_on_sinking_velocity.pdf, page 2>
 Package pdftex.def Info: appendices/notes_on_sinking_velocity.pdf, page2 used o
-n input line 551.
+n input line 671.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
- [18 <./appendices/notes_on_sinking_velocity.pdf>]
+ [20 <./appendices/notes_on_sinking_velocity.pdf>]
 File: appendices/notes_on_sinking_velocity.pdf Graphic file (type pdf)
 
 <use appendices/notes_on_sinking_velocity.pdf, page 3>
 Package pdftex.def Info: appendices/notes_on_sinking_velocity.pdf, page3 used o
-n input line 551.
+n input line 671.
 (pdftex.def)             Requested size: 614.58406pt x 795.3441pt.
- [19 <./appendices/notes_on_sinking_velocity.pdf>] (./appendices/particle_open_
+ [21 <./appendices/notes_on_sinking_velocity.pdf>] (./appendices/particle_open_
 bin.tex
 (/usr/local/texlive/2015/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2014/09/06 1.5e listings language file
-) [20])
-[21] (./appendices/particle_bin2csv.tex [22]) [23]
+) [22])
+[23] (./appendices/particle_bin2csv.tex [24]) [25]
 
 Package glossaries Warning: Deprecated command \glossarystyle.
  I recommend you switch to \setglossarystyle unless you want to maintain backwa
-rd compatibility on input line 565.
+rd compatibility on input line 685.
 
 No file PSOM_User_Manual.gls.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 569.
-[24]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 569.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 689.
+[26]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 689.
  (./PSOM_User_Manual.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 569.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 569.
-Package rerunfilecheck Info: File `PSOM_User_Manual.out' has not changed.
-(rerunfilecheck)             Checksum: 4C9DFC9CD4B402E362A84110FD26F99C;2253.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 689.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 689.
+
+
+Package rerunfilecheck Warning: File `PSOM_User_Manual.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `PSOM_User_Manual.out':
+(rerunfilecheck)             Before: 4C9DFC9CD4B402E362A84110FD26F99C;2253
+(rerunfilecheck)             After:  CA4B8ADE75FFEC416745E61C44F27BFF;2662.
+
+LaTeX Warning: There were undefined references.
 
 
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 569.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 689.
  ) 
 Here is how much of TeX's memory you used:
- 17426 strings out of 493089
- 262943 string characters out of 6134842
- 587576 words of memory out of 5000000
- 20086 multiletter control sequences out of 15000+600000
- 44217 words of font info for 188 fonts, out of 8000000 for 9000
+ 17896 strings out of 493089
+ 268413 string characters out of 6134842
+ 597999 words of memory out of 5000000
+ 20530 multiletter control sequences out of 15000+600000
+ 44336 words of font info for 190 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  46i,18n,99p,1819b,2330s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
@@ -1017,10 +1106,10 @@ w/courier/ucrr8a.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/urw/times/
 utmb8a.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/urw/times/utmr8a.pfb
 ></usr/local/texlive/2015/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/loc
 al/texlive/2015/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on PSOM_User_Manual.pdf (25 pages, 3154798 bytes).
+Output written on PSOM_User_Manual.pdf (27 pages, 3167086 bytes).
 PDF statistics:
- 837 PDF objects out of 1000 (max. 8388607)
- 769 compressed objects within 8 object streams
- 361 named destinations out of 1000 (max. 500000)
+ 862 PDF objects out of 1000 (max. 8388607)
+ 792 compressed objects within 8 object streams
+ 374 named destinations out of 1000 (max. 500000)
  38196 words of extra memory for PDF output out of 42996 (max. 10000000)
 

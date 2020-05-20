@@ -29,6 +29,11 @@
 \BOOKMARK [2][-]{subsection.8.1}{Compile GOTM}{section.8}% 29
 \BOOKMARK [2][-]{subsection.8.2}{Compiling PSOM with GOTM}{section.8}% 30
 \BOOKMARK [2][-]{subsection.8.3}{Other notes}{section.8}% 31
-\BOOKMARK [1][-]{appendix.A}{Appendix A}{}% 32
-\BOOKMARK [1][-]{appendix.B}{Appendix B - particle\137open\137bin.m}{}% 33
-\BOOKMARK [1][-]{appendix.C}{Appendix C - particle\137bin2csv}{}% 34
+\BOOKMARK [1][-]{section.9}{Modifying grids with a bottom topography}{}% 32
+\BOOKMARK [2][-]{subsection.9.1}{The vertically stretched sigma-grids}{section.9}% 33
+\BOOKMARK [2][-]{subsection.9.2}{Derivatives of sigma}{section.9}% 34
+\BOOKMARK [2][-]{subsection.9.3}{A new four-section grids with a bottom topography}{section.9}% 35
+\BOOKMARK [2][-]{subsection.9.4}{Derivatives in the new grids}{section.9}% 36
+\BOOKMARK [1][-]{appendix.A}{Appendix A}{}% 37
+\BOOKMARK [1][-]{appendix.B}{Appendix B - particle\137open\137bin.m}{}% 38
+\BOOKMARK [1][-]{appendix.C}{Appendix C - particle\137bin2csv}{}% 39
