@@ -17,6 +17,12 @@
 %\usepackage{geometry}
 \usepackage{pdfpages}
 \usepackage[top=2.5cm, bottom=2.5cm, outer=5cm, inner=2.5cm, heightrounded, marginparwidth=4cm, marginparsep=.5cm]{geometry}
+\usepackage{xcolor}
+\usepackage{amssymb,amsmath}
+\usepackage{color, colortbl}
+\newcommand{\Red}[1]{{\color{red}#1}}
+\newcommand{\Blue}[1]{{\color{blue}#1}}
+
 
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.4,0.4,0.4}
@@ -540,6 +546,118 @@ There are a few options we need to change in order to couple GOTM and PSOM. In P
     \item If the flag is set to KPP, may need an additional input file to define parameters (see \href{https://github.com/PSOM/V1.0/blob/master/code/gotmturb.nml}{ https://github.com/PSOM/V1.0/blob/master/code/gotmturb.nml})
     \item right now, running PSOM with implicit mixing is much slower than explicit mixing. 
 \end{itemize}
+
+\section{Modifying grids with a bottom topography}
+% ===========================================
+\subsection{The vertically stretched sigma-grids}
+
+In general, a vertical stretching is used as
+\begin{equation}
+  z = \frac{\exp\left(\frac{N_{top}-\sigma}{N_{top} - N_{bot}} p\right) - 1}{\exp(p)-1} (D_{bot} - D_{top}) +D_{top}.\label{eq:z}
+\end{equation}
+where $N_{top}$ and $N_{bot}$ are the sigma-indices of the top and bottom boundaries, respectively, $D_{top}$ and $D_{bot}$ are the z-coordinates (negative values for the ocean) of the top and bottom boundaries, respectively, and $p$ is a factor that controls the tightness of the stretching. The greater $p$, the more stretching. In the code, $p$ is represented by \Blue{pfac}. One can check that when $\sigma = N_{bot}$, $z =D_{bot}$; and when $\sigma = N_{top}$, $z =D_{top}$. \par
+
+The top-most layer is defined as the free surface, thus for the stretched part of the grids, $N_{top}=Nk-1$ and $D_{top}=-dztop$. If a fixed bottom thickness is defined, $N_{bot}=1$ and $D_{bot}=D+dzbot$; otherwise, $N_{bot}=0$ and $D_{bot}=D$.\par
+
+\Blue{D} is the z-coordinate of the topography as a function of $x$ and $y$; \Blue{dzbot} and \Blue{dztop} are the bottom and top layer thickness (positive values), respectively. They are defined independently from the stretching, but grid sizes in the whole domain have to be varying smoothly in all directions.\par
+
+In the code, $\sigma$ is calculated in two subroutines: \Blue{staticsigma.f90} and \Blue{sigma\_toplayer.f90}. \eqref{eq:z} appears in \Blue{findz\_topmoves.f90} and \Blue{sigma2z.f90} (only called in models with particle tracking). For simplicity, we define an index \Blue{dnkm1} for the top boundary. If a fixed bottom thickness is defined, \Blue{dnkm1} equals $Nk-2$; otherwise, \Blue{dnkm1} equals $Nk-1$. In findz\_topmoves.f90, \eqref{eq:z} reads \par
+\begin{center}
+xfac = (dnkm1-sigma)/dnkm1, \\
+z = (exp(pfac*xfac)-1)/epm1*(D+dzbot+dztop)-dztop.
+\end{center}
+
+% ===========================================
+\subsection{Derivatives of sigma}
+
+We write $\sigma$ in terms of $z$
+\begin{equation}
+  \frac{z-D_{top}}{D_{bot}-D_{top}}= \frac{\exp\left(\frac{N_{top}-\sigma}{N_{top}-N_{bot}} p\right) - 1}{\exp(p)-1}, \nonumber 
+\end{equation}
+\begin{equation}
+  \frac{(z-D_{top})[\exp(p)-1]}{D_{bot}-D_{top}} +1 = \exp\left(\frac{N_{top}-\sigma}{N_{top}-N_{bot}}p \right), \nonumber 
+\end{equation}
+\begin{equation}
+  log{\left\{\frac{(z-D_{top})[\exp(p)-1]}{D_{bot}-D_{top}} +1 \right\}} = \frac{N_{top}-\sigma}{N_{top}-N_{bot}}p, \nonumber 
+\end{equation}
+\begin{equation}
+  \sigma = N_{top} - \frac{N_{top}-N_{bot}}{p} log{\left\{\frac{(z-D_{top})[\exp(p)-1]}{D_{bot}-D_{top}} +1 \right\}}. \nonumber 
+\end{equation}
+
+Take the z-derivative
+\begin{align}
+  \frac{\partial \sigma}{\partial z} &=-\frac{N_{top}-N_{bot}}{p} \left\{\frac{(z-D_{top})[\exp(p)-1]}{D_{bot}-D_{top}} +1 \right\}^{-1} \frac{\exp(p)-1}{D_{top}-D_{bot}} \nonumber \\
+  & =-\frac{N_{top}-N_{bot}}{p} \frac{D_{bot}-D_{top}}{(z-D_{top})[\exp(p)-1]+D_{bot}-D_{top}} \frac{\exp(p)-1}{D_{top}-D_{bot}} \nonumber \\
+  &=-\frac{N_{top}-N_{bot}}{p} \frac{\exp(p)-1}{(z-D_{top})[\exp(p)-1]+D_{bot}-D_{top}}. \label{eq:wz}
+\end{align}
+
+In the code, $\frac{\partial \sigma}{\partial z}$ appears as \Blue{wz} for cell centers and \Blue{wzk} for cell faces in \Blue{staticsigma.f90}. Parameters \Blue{epm1},\Blue{zpd}, and \Blue{hpd} represent $\exp(p)-1$, $z+dztop$, and $D+dztop$. If a fixed bottom thickness is defined, \Blue{dnkm1} and \Blue{dnkm1p} equal $Nk-2$ and $(Nk-2)/p$, respectively; otherwise, \Blue{dnkm1} and \Blue{dnkm1p} equal $Nk-1$ and $(Nk-1)/p$, respectively. Thus \eqref{eq:wz} reads
+\begin{center}
+wz = -epm1*dnkm1p/(epm1*zpd+hpd).
+\end{center}
+
+% \begin{figure}[htb]
+% \begin{center}
+%  \noindent\includegraphics[width=30pc,angle=0]{grid_z-copy.pdf}
+%  \caption{Schematic plot of the $z$-grids}
+% \end{center}
+% \end{figure}
+
+% ===========================================
+\subsection{A new four-section grids with a bottom topography}
+
+We propose a new four-section grids that are composed of the top, upper, lower, and bottom layers. As the original grids, the top layer is the free surface and bottom layer has a fixed thickness. We define a flat depth \Blue{Df}, where layers above it are flat, having no variations in the horizontal, while layers below it are corrugated, gradually align with the topography when approaching the bottom. We select the number of layers below the flat depth to be \Blue{Nf} so that the new grids are as sketched in Figure 2.\par
+
+% \begin{figure}[htb]
+% \begin{center}
+%  \noindent\includegraphics[width=30pc,angle=0]{grid_z-copy.pdf}
+%  \caption{Schematic plot of the $z$-grids}
+% \end{center}
+% \end{figure}
+
+For the upper layer, $N_{top}$ and $N_{bot}$ are replaced by $Nk-1$ and $Nf$, and $D_{top}$ and $D_{bot}$ are replaced by $-dztop$ and $Df$ in \eqref{eq:z}.
+\begin{equation}
+  z = \frac{\exp\left(\frac{Nk-1-\sigma}{Nk-1 - Nf} p\right) - 1}{\exp(p)-1} (Df +dztop)-dztop \label{eq:z_upper}
+\end{equation}
+
+In the code, \eqref{eq:z_upper} reads
+\begin{center}
+xfac = (dnkm1-sigma)/(dnkm1-Nf), \\
+z = (exp(pfac*xfac)-1)/epm1*(Df+dztop)-dztop.
+\end{center}
+
+For the lower layer, if a fixed bottom thickness is defined, $N_{top}$ and $N_{bot}$ are replaced by $Nf$ and 1, and $D_{top}$ and $D_{bot}$ are replaced by $Df$ and $D+dzbot$ in \eqref{eq:z}; otherwise, $N_{top}$ and $N_{bot}$ are replaced by $Nf$ and 0, and $D_{top}$ and $D_{bot}$ are replaced by $Df$ and $D$.
+\begin{equation}
+  z = \frac{\exp\left(\frac{Nf-\sigma}{Nf} p\right) - 1}{\exp(p)-1} (D +dzbot - Df)+Df \label{eq:z_lower}
+\end{equation}
+
+For simplicity, we define a new index \Blue{dnf} for the flat depth: if a fixed bottom thickness is defined, dnf equals $Nf-1$; otherwise, dnf equals $Nf$. In the code, \eqref{eq:z_lower} reads
+\begin{center}
+xfac = (dnf-sigma)/dnf,\\
+z = (exp(pfac*xfac)-1)/epm1*(D+dzbot-Df)+Df.
+\end{center}
+
+\subsection{Derivatives in the new grids}
+
+For the upper layer, dnkm1 equals $Nk-1$ and dnf equals $Nf$
+\begin{equation}
+\frac{\partial \sigma}{\partial z} =-\frac{Nk-1-Nf}{p}\frac{\exp(p)-1}{(z+dztop)[\exp(p)-1]+Df+dztop},
+\end{equation}
+which reads
+\begin{center}
+wz = -epm1*(dnkm1-dnf)/pfac/(epm1*zpd+Df+dztop).
+\end{center}
+
+For the lower layer, if a fixed bottom thickness is defined, dnf equals $Nf-1$; otherwise, dnf equals $Nf$.
+\begin{equation}
+\frac{\partial \sigma}{\partial z} =-\frac{Nf}{p}\frac{\exp(p)-1}{(z-Df)[\exp(p)-1]+D+dzbot-Df},
+\end{equation}
+which reads
+\begin{center}
+wz = -epm1*dnf/pfac/(epm1*(z-Df)+D+dzbot-Df).
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \pagebreak
 \appendix
